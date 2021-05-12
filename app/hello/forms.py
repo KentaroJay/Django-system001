@@ -1,13 +1,14 @@
+from typing import Text
 from django import forms
+from django.forms.widgets import TextInput
+from .models import Friend
 
 
-class HelloForm(forms.Form):
-    data = [
-        ('one', 'item 1'),
-        ('two', 'item 2'),
-        ('three', 'item 3'),
-        ('four', 'item 4'),
-        ('five', 'item 5'),
-    ]
-    choice = forms.MultipleChoiceField(label='radio',
-                                       choices=data, widget=forms.SelectMultiple(attrs={'size': 5}))
+class FriendForm(forms.ModelForm):
+    class Meta:
+        model = Friend
+        fields = ['name', 'mail', 'gender', 'age', 'birthday']
+
+class FindForm(forms.Form):
+    find = forms.CharField(label='Find', required=False, \
+        widget=forms.TextInput(attrs={'class':'form-control'}))
