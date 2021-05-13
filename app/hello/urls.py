@@ -5,6 +5,7 @@ from .views import FriendDetail
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('<int:num>', views.index, name='index'),
     path('create', views.create, name='create'),
     path('edit/<int:num>', views.edit, name='edit'),
     path('delte/<int:num>', views.delete, name='delete'),
