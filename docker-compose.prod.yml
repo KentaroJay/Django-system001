@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+    # サービス名は自由に設定
+    django:
+        # appディレクトリの中から`Dockerfile`を探す
+        build: ./app
+        # サービス起動後に入力されるコマンドを設定
+        command: gunicorn django_app.wsgi:application --bind 0.0.0.0:8000
+        # データを永続化させる場合の設定。`host:container`でパスを記載
+        volumes:
+            - static_volume:/usr/src/app/staticfiles
+        # 開放するポートを指定。`host:container`でポートを記載
+        expose:
+            - 8000
+        # 環境変数を指定
+        env_file: .env
+
+    nginx:
+        build: ./nginx
+        volumes:
+            - static_volume:/usr/src/app/staticfiles
+        ports:
+            - 80:80
+        depends_on:
+            - django
+
+volumes:
+    static_volume:
