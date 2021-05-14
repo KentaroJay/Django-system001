@@ -1,7 +1,7 @@
 from typing import Text
 from django import forms
 from django.forms.widgets import TextInput
-from .models import Friend
+from .models import Friend, Message
 
 
 class FriendForm(forms.ModelForm):
@@ -16,9 +16,8 @@ class FriendForm(forms.ModelForm):
         }
 
 
-
 class FindForm(forms.Form):
-    find = forms.CharField(label='Find', required=False,\
+    find = forms.CharField(label='Find', required=False,
                            widget=forms.TextInput(attrs={'class': 'form-control'}))
 
 
@@ -29,3 +28,15 @@ class CheckForm(forms.Form):
                              widget=forms.NumberInput(attrs={'class': 'form-control'}))
     max = forms.IntegerField(label='Max', max_value=1000,
                              widget=forms.NumberInput(attrs={'class': 'form-control'}))
+
+
+class MessageForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = ['title', 'content', 'friend']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+            'content': forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 2}),
+            'friend': forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        }
+ 
