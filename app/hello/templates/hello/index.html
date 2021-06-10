@@ -12,6 +12,14 @@
   </head>
   <body class="container">
     <h1 class="display-4 text-primary">{{title}}</h1>
+    <ul>
+      <li><a href="{% url 'index' %}">Home</a></li>
+      <li><a href="{% url 'create' %}">Create</a></li>
+      <li><a href="{% url 'list' %}">List</a></li>
+      <li><a href="{% url 'find' %}">Find</a></li>
+      <li><a href="{% url 'check' %}">Check</a></li>
+      <li><a href="{% url 'message' %}">Message</a></li>
+    </ul>
     <p>{{message|safe}}</p>
     <table class="table">
       <tr>
