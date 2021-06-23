@@ -1,3 +1,4 @@
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
@@ -5,10 +6,28 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
 
 from .models import Message, Friend, Group, Good
 from .forms import GroupCheckForm, GroupSelectForm,\
-    FriendsForm, CreateGroupForm, PostForm
+    FriendsForm, CreateGroupForm, PostForm, UserForm
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+
+# ユーザー登録
+
+
+class UserCreateView(CreateView):
+    form_class = UserForm
+    template_name = "sns/usercreate.html"
+    success_url = reverse_lazy("index")
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        self.object = user
+        return HttpResponseRedirect(self.get_success_url())
+
 
 # indexのビュー関数
 
