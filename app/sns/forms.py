@@ -1,6 +1,13 @@
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from.models import Message, Group, Friend, Good
+
+
+class UserForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'password']
 
 # Messageのフォーム（未使用）
 
