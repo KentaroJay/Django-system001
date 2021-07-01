@@ -1,4 +1,4 @@
 # Django-system001
 Djangoアプリケーション
 
-http://52.199.173.128/hello/
+https://sns.app-todo-jay.work/sns/
