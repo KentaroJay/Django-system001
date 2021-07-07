@@ -7,7 +7,7 @@ from.models import Message, Group, Friend, Good
 class UserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'password']
+        fields = ['username', "is_staff"]
 
 # Messageのフォーム（未使用）
 
