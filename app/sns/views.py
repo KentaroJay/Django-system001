@@ -23,7 +23,9 @@ class UserCreateView(CreateView):
     success_url = reverse_lazy("index")
 
     def form_valid(self, form):
-        user = form.save()
+        user = form.save(commit=False)
+        user.is_staff = True
+        user.save()
         login(self.request, user)
         self.object = user
         return HttpResponseRedirect(self.get_success_url())

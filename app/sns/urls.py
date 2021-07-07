@@ -11,5 +11,5 @@ urlpatterns = [
     path('post', views.post, name='post'),
     path('share/<int:share_id>', views.share, name='share'),
     path('good/<int:good_id>', views.good, name='good'),
-    path('createuser', UserCreateView.as_view(), name='createuser')
+    path('createuser', UserCreateView.as_view(), name='createuser'),
 ]
